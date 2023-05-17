@@ -1,0 +1,25 @@
+# Exibir a versão do Python em execução e o usuário.
+ver:
+  stage: .pre
+  script:
+    - python --version
+    - whoami
+    
+# Executa efetivamente o teste unitário definido em tests/appTest.py
+run_tests:
+  stage: test
+  script:
+    - pip install -r requirements.txt
+    - python -m unittest -v tests/appTest.py
+
+sast:
+  stage: test
+  artifacts:
+    # possibilitará o download do relatório SAST gerado
+    paths:
+    - 'gl-sast-report.json'
+
+# Efetivo uso de dois templates: para deploy no ECS e execução do SAST
+include:
+  - template: AWS/Deploy-ECS.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml

@@ -1,0 +1,48 @@
+include:
+  - template: Terraform/Base.gitlab-ci.yml
+
+stages:
+  - validate
+  - build # terraform plan
+  - deploy # terraform apply
+  - cleanup # terraform destroy
+
+variables:
+  TF_STATE_NAME: dev-tf-state-2
+  TF_CACHE_KEY: dev-tf-cache
+  TF_ROOT: terraform # the terraform files are in this subdirectory. set TF_ROOT accordingly if yours are different
+
+validate: # validate stage
+  extends: .terraform:validate
+
+build:
+  extends: .terraform:build
+  script:
+    - cd "${TF_ROOT}"
+    - gitlab-terraform plan
+      -lock=false 
+      -var "s3_name=${S3_NAME}"
+    - gitlab-terraform plan-json
+
+deploy:
+  extends: .terraform:deploy
+  script:
+    - gitlab-terraform apply
+      -lock=false
+  environment:
+    name: $TF_STATE_NAME
+    on_stop: cleanup
+  dependencies:
+    - build
+  rules:
+    - when: always
+
+cleanup:
+  extends: .terraform:destroy
+  environment:
+    name: $TF_STATE_NAME
+    action: stop
+  script:
+    - cd "${TF_ROOT}"
+    - gitlab-terraform destroy
+      -var "s3_name=${S3_NAME}"

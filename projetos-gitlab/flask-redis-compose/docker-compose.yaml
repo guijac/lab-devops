@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  redis:
+    image: redis:alpine
+    ports:
+      - '6379:6379'
+  web:
+    # o mesmo que um "docker build"
+    build:
+      # localização do arquivo "Dockerfile"
+      context: .
+    # identificação de parada da aplicação para o contêiner 
+    # flask requires SIGINT to stop gracefully
+    # (default stop signal from Compose is SIGTERM)
+    stop_signal: SIGINT
+    ports:
+      - '5000:5000'
+    depends_on:
+      - redis

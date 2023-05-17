@@ -1,0 +1,2 @@
+include:
+  - template: AWS/Deploy-ECS.gitlab-ci.yml
