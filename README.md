@@ -4,7 +4,7 @@ Repositório que concentra todos os projetos desenvolvidos na disciplina de Ambi
 
 ## Temas Abordados
 
-1. Gestão de Configuração em DevOps com Jira, Confluence e Gitlab;
+1. Gerenciamento de Configuração em DevOps com Jira, Confluence e Gitlab;
 2. Fluxos de Trabalho (workflows) com Git;
 3. Contêineres com Docker;
 4. Orquestração de Contêineres com Docker Compose;
