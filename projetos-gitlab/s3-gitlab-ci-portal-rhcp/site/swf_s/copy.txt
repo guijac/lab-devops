@@ -1,4 +1,0 @@
-﻿textField= Novidades
-O Stiletto responde às perguntas que ninguém tem coragem de fazer. É possível produzir um carro elétrico de desempenho satisfatório? É possível produzir um carro de luxo com preço acessível? É possível produzir um carro pequeno e seguro? É possível ir do Rio de Janeiro a Petrópolis em um carro elétrico?
-A Z.E.V. tem uma resposta: Sim.
-

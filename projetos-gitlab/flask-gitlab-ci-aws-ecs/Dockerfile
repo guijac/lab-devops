@@ -1,6 +1,6 @@
 # Especificação da imagem Docker a ser utilizada, neste caso a imagem Python 
 # oficial da Docker do tipo "Alpine", mais "enxuta"
-FROM python:3-alpine
+FROM python:3.11-alpine
 
 # Dependências Linux para a instalação do uWSGI dentro do contêiner.
 RUN apk add --virtual .build-dependencies \
@@ -19,6 +19,9 @@ WORKDIR /my-flask-app-ecs
 # do contêiner.
 COPY /app /my-flask-app-ecs
 COPY requirements.txt /my-flask-app-ecs
+
+# Mantém o gerenciador de pacotes (pip) atualizado, independente da imagem base. 
+RUN pip3 install --upgrade pip
 
 # Executa a instalação da dependência do projeto, uma boa prática é justamente
 # especificar estas dependências em um arquivo texto. 

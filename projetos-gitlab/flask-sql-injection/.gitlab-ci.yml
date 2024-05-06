@@ -5,8 +5,12 @@
 # Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+image: 
+  python:latest  # this sets default image for jobs
+
 stages:
 - ver
+- test
 - security
 
 ver:
@@ -17,9 +21,6 @@ ver:
 
 sast:
   stage: security
-  artifacts:
-    # possibilitará o download do relatório SAST gerado
-    paths:
-    - 'gl-sast-report.json'
 include:
 - template: Security/SAST.gitlab-ci.yml
+- template: Security/Secret-Detection.gitlab-ci.yml

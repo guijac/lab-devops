@@ -5,7 +5,7 @@ resource "aws_s3_bucket" "this" {
 resource "aws_s3_bucket_ownership_controls" "this" {
   bucket = aws_s3_bucket.this.id
   rule {
-    object_ownership = "ObjectWriter"
+    object_ownership = "BucketOwnerPreferred"
   }
 }
 
@@ -37,6 +37,36 @@ resource "aws_s3_bucket_website_configuration" "this" {
   error_document {
     key = "index.html"
   }
+
+}
+
+# S3 bucket policy
+resource "aws_s3_bucket_policy" "this" {
+  bucket = aws_s3_bucket.this.id
+
+  policy = <<POLICY
+{
+  "Id": "Policy",
+  "Statement": [
+    {
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::${aws_s3_bucket.this.id}/*",
+      "Principal": {
+        "AWS": [
+          "*"
+        ]
+      }
+    }
+  ]
+}
+POLICY
+
+  depends_on = [
+    aws_s3_bucket_public_access_block.this
+  ]
 
 }
 

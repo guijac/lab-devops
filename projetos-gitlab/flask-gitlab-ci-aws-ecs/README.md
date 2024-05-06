@@ -43,11 +43,15 @@ $ python -m unittest -v tests/appTest.py
 ```
 Saída esperada:
 ```
-test_http_code (tests.appTest.AppTest.test_http_code) ... ok
-test_print_hello_world (tests.appTest.AppTest.test_print_hello_world) ... ok
-----------------------------------------------------------------------------
+test_http_code_health_check (tests.appTest.AppTest.test_http_code_health_check) ... ok
+test_http_code_hello_error (tests.appTest.AppTest.test_http_code_hello_error) ... ok
+test_print_health_check (tests.appTest.AppTest.test_print_health_check) ... ok
+test_print_hello_error (tests.appTest.AppTest.test_print_hello_error) ... ok
+test_print_hello_success (tests.appTest.AppTest.test_print_hello_success) ... ok
 
-Ran 2 tests in 0.013s
+----------------------------------------------------------------------
+Ran 5 tests in 0.010s
+
 OK
 ```
 Baseado no projeto [Docker-Flask-uWSGI](https://github.com/cirolini/Docker-Flask-uWSGI/)
