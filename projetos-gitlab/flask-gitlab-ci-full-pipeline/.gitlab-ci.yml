@@ -1,25 +1,19 @@
-# Exibir a versão do Python em execução e o usuário.
-ver:
-  stage: .pre
-  script:
-    - python --version
-    - whoami
-    
-# Executa efetivamente o teste unitário definido em tests/appTest.py
+# Imagem base para execução da pipeline, que depende de um ambiente Python
+image:
+  python:latest
+
+# Executa os testes unitários especificados em tests/appTest.py
 run_tests:
   stage: test
   script:
     - pip install -r requirements.txt
     - python -m unittest -v tests/appTest.py
 
-sast:
-  stage: test
-  artifacts:
-    # possibilitará o download do relatório SAST gerado
-    paths:
-    - 'gl-sast-report.json'
-
-# Efetivo uso de dois templates: para deploy no ECS e execução do SAST
+# Templates do Gitlab para facilitar as etapas de build da imagem Docker, 
+# deploy no ECS, SAST com Semgrep, detecção de segredos com Gitleaks e 
+# escaneamento de vulnerabilidades no contêiner com Trivy.
 include:
   - template: AWS/Deploy-ECS.gitlab-ci.yml
+  - template: Security/Secret-Detection.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
+  - template: Jobs/Container-Scanning.gitlab-ci.yml

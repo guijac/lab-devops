@@ -7,7 +7,7 @@ class AppTest(unittest.TestCase):
 
     def test_print_health_check(self):
         response = self.app.get('/health-check')
-        self.assertEqual("<h1>Hello From ECS! v4</h1>", response.get_data(as_text=True)
+        self.assertEqual("<h1>Hello From ECS! v6</h1>", response.get_data(as_text=True)
                           , "Deu Ruim no test_print_hello_world!")
 
     def test_http_code_health_check(self):
@@ -19,9 +19,14 @@ class AppTest(unittest.TestCase):
         self.assertEqual("Hello, guijac!", response.get_data(as_text=True)
                         , "Deu Ruim no test_print_hello_success!")
 
-    def test_print_hello_error(self):
+    def test_http_code_hello_error(self):
         response = self.app.get('/hello')
         self.assertEqual(400, response.status_code, "Deu Ruim no test_print_hello_error!")
+
+    def test_print_hello_error(self):
+        response = self.app.get('/hello')
+        self.assertEqual("Nome não informado", response.get_data(as_text=True)
+                        , "Deu Ruim no test_print_hello_success!")
         
 if __name__ == "__main__":
     unittest.main()

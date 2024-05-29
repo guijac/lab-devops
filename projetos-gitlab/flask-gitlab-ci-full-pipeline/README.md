@@ -1,15 +1,17 @@
 # Flask Gitlab-CI-Full-Pipeline
 
-![](assets/20230425_102906_20230425_102650_Lab-Full-Pipeline.drawio.png)
+![](assets/Lab-Full-Pipeline-Gitlab-CI-CD.drawio.png)
 
-Modelo para uso do CI/CD do Gitlab em uma aplicação Python+Flask+uWSGI, realizando a execução dos seguintes stages:
+Modelo para uso do CI/CD do Gitlab em uma aplicação Python+Flask+uWSGI, realizando:
 
-1. Testes Unitários com PyUnit;
-2. Build da imagem Docker no Gitlab Registry;
-3. SAST com Semgrep;
-4. Deploy no AWS ECS.
+* [X] Build da imagem Docker no Gitlab Registry (3);
+* [X] Escaneamento de Vulnerabilidades do Contêiner com Trivy (4);
+* [X] Testes Unitários com PyUnit (4);
+* [X] Detecção de Segredos com Gitleaks (4);
+* [X] SAST com Semgrep (4);
+* [X] Deploy no AWS ECS (5).
 
-Para a execução da pipeline o Gitlab Runner foi [configurado em uma instância AWS EC2](https://docs.gitlab.com/runner/install/linux-repository.html), com Ubuntu.
+Para a execução da pipeline o arquivo .gitlab-ci.yml utiliza os templates disponíveis pelo Gitlab, sendo responsável apenas pela especificação dos testes unitários.
 
 ## Variáveis Configuradas no Gitlab
 
@@ -32,12 +34,14 @@ $ docker build --tag your-user/my-flask-app-ecs-full-pipeline .
 ```
 $ docker run -d -p 5000:5000 your-user/my-flask-app-ecs-full-pipeline
 ```
+
 Saída esperada:
+
 ```
 id-contêiner
 $ curl localhost:5000/health-check
 
-<h1>Hello From ECS! v4</h1>
+<h1>Hello From ECS! v6</h1>
 ```
 
 ## Executando testes unitários
@@ -45,18 +49,23 @@ $ curl localhost:5000/health-check
 ```
 $ python -m unittest -v tests/appTest.py
 ```
+
 Saída esperada:
+
 ```
 test_http_code_health_check (tests.appTest.AppTest.test_http_code_health_check) ... ok
-test_print_health_check (tests.appTest.AppTest.test_print_health_check) ... ok
-test_print_hello_error (tests.appTest.AppTest.test_print_hello_error) ... {"time": "2023-05-08 17:44:28,035", "level": "ERROR", "message": {"event": "hello-error", "url": "http://localhost/hello", "user_agent": "werkzeug/2.2.2", "error_message": "Nome n\u00e3o informado"}}   
+test_http_code_hello_error (tests.appTest.AppTest.test_http_code_hello_error) ... {"time": "2024-05-22 09:24:49,724", "level": "ERROR", "message": {"event": "hello-error", "url": "http://localhost/hello", "user_agent": "Werkzeug/3.0.0", "error_message": "Nome n\u00e3o informado"}}
 ok
-test_print_hello_success (tests.appTest.AppTest.test_print_hello_success) ... {"time": "2023-05-08 17:44:28,038", "level": "INFO", "message": {"event": "heloo-success", "url": "http://localhost/hello?name=guijac", "user_agent": "werkzeug/2.2.2", "nome": "guijac"}}
+test_print_health_check (tests.appTest.AppTest.test_print_health_check) ... ok
+test_print_hello_error (tests.appTest.AppTest.test_print_hello_error) ... {"time": "2024-05-22 09:24:49,726", "level": "ERROR", "message": {"event": "hello-error", "url": "http://localhost/hello", "user_agent": "Werkzeug/3.0.0", "error_message": "Nome n\u00e3o informado"}}
+ok
+test_print_hello_success (tests.appTest.AppTest.test_print_hello_success) ... {"time": "2024-05-22 09:24:49,727", "level": "INFO", "message": {"event": "hello-success", "url": "http://localhost/hello?name=guijac", "user_agent": "Werkzeug/3.0.0", "nome": "guijac"}}
 ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.045s
+Ran 5 tests in 0.012s
 
 OK
 ```
+
 Baseado no projeto [Docker-Flask-uWSGI](https://github.com/cirolini/Docker-Flask-uWSGI/)

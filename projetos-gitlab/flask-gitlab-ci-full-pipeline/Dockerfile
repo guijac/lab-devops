@@ -1,6 +1,6 @@
 # Especificação da imagem Docker a ser utilizada, neste caso a imagem Python 
 # oficial da Docker do tipo "Alpine", mais "enxuta"
-FROM python:3-alpine
+FROM python:3.12.3-alpine
 
 # Dependências Linux para a instalação do uWSGI dentro do contêiner.
 RUN apk add --virtual .build-dependencies \

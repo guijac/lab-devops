@@ -17,7 +17,7 @@ logger.addHandler(handler)
 
 @app.route('/health-check')
 def health_check():
-    return "<h1>Hello From ECS! v4</h1>"
+    return "<h1>Hello From ECS! v6</h1>"
 
 @app.route('/hello')
 def hello():
