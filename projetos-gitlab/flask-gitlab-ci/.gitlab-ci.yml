@@ -1,0 +1,21 @@
+# Official language image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/python/tags/
+image: python:latest  # this sets default image for jobs
+
+stages:
+  - ver
+  - tests
+
+# Exibir a versão do Python em execução e o usuário.
+ver:
+  stage: ver
+  script:
+    - python --version
+    - whoami
+
+# Executa efetivamente o teste unitário definido em tests/appTest.py
+run_tests:
+  stage: tests
+  script:
+    - pip install -r requirements.txt
+    - python -m unittest -v tests/appTest.py
