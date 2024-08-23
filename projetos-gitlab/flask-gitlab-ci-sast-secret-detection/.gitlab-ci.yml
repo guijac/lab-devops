@@ -1,0 +1,24 @@
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
+# Stage criado automaticamente ao criar um novo projeto no Gitlab marcando a opção 
+# "Enable Static Application Security Testing (SAST)"
+
+# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
+# Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+image:
+  python:latest
+    
+# Executa efetivamente a classe de teste unitário existente em tests/appTest.py
+# Por ser uma aplicação Python+Flask, instala as dependências contidas no arquivo requirements.txt
+run_unit_tests:
+  stage: test
+  script:
+    - pip install -r requirements.txt
+    - python -m unittest -v tests/appTest.py
+    
+include:
+- template: Security/Secret-Detection.gitlab-ci.yml
+- template: Security/SAST.gitlab-ci.yml
