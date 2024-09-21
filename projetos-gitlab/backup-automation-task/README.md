@@ -24,9 +24,9 @@ $ python python/backup-files.py
 
 O comando time é utilizado para medir quanto tempo um processo leva para ser executado. Ele reporta três tipos de tempo:
 
-- Real Time (real): O tempo real decorrido, do início ao fim, incluindo o tempo gasto esperando por E/S e outros processo;
+- Real Time (real): O tempo real decorrido, do início ao fim, incluindo o tempo gasto esperando por E/S e outros processos;
 - User Time (user): A quantidade de tempo de CPU gasto executando instruções de modo de usuário dentro do processo;
-- System Time (sys): A quantidade de tempo de CPU gasto executando instruções de nível de sistema em nome do processo.
+- System Time (sys): A quantidade de tempo de CPU gasto no modo kernel durante a execução. O modo kernel contém operações como E/S de disco, E/S de rede, dispositivos, alocação de memória etc.
 
 ```
 $ time bash/create-files.sh
