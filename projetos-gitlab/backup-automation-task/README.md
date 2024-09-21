@@ -70,4 +70,4 @@ $ ./cleanup_directories.sh
 
 ## Conclusão
 
-Scripts em Bash tendem a ser mais rápidos para operações simples como a criação de arquivos, já que são diretamente integrados ao shell do sistema operacional ao passo que Python possui um melhor desempenho com o uso de bibliotecas otimizadas, como shutil.
+Scripts em Bash tendem a ser mais rápidos para operações simples como a criação de arquivos, já que são diretamente integrados ao shell do sistema operacional, ao passo que Python possui um melhor desempenho na cópia de arquivos, através do uso de bibliotecas otimizadas, como shutil.
