@@ -6,14 +6,14 @@ Simples coleção de scripts Python e Bash para criação de arquivos, demonstra
 
 Ambiente Unix-like (como MacOS ou Linux) ou Windows com Git Bash.
 
-## Criando os arquivos (Bash)
+## Automação com Bash
 
 ```
 $ bash/create-files.sh
 $ bash/backup-files.sh
 ```
 
-## Criando os arquivos (Python)
+## Automação com Python
 
 ```
 $ python python/create-files.py
