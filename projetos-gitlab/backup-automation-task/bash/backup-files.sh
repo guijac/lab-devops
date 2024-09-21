@@ -5,9 +5,7 @@ DIR_ORIGEM="./meus_arquivos"
 DIR_BACKUP="./meu_backup"
 
 # Verificar se o diretório de backup existe, se não, criá-lo
-if [ ! -d "$DIR_BACKUP" ]; then
-  mkdir -p "$DIR_BACKUP"
-fi
+mkdir -p "$DIR_BACKUP"
 
 # Data atual para adicionar ao nome dos arquivos de backup
 DATA=$(date +%Y%m%d)

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Diretório dos arquivos que serão criados
-DIR="././meus_arquivos"
+DIR="./meus_arquivos"
 
 # Cria o diretório, se não existir
 mkdir -p "$DIR"
