@@ -27,8 +27,7 @@ Aplicação Flask + BD para demonstração de uma vulnerabilidade SQL Injection 
     75 result = conn.execute(sql_Query_Injection)
 
  - As linhas 66 e 67 **não contém** uma vulnerabilidade SQL Injection;
- - As linhas 69 a 71 **contém** uma vulnerabilidade SQL Injection, **não identificável** no SAST do .gitlab-ci;
- - As linhas 74 e 75 **contém** uma vulnerabilidade SQL Injection, **identificável** no SAST do .gitlab-ci.
+ - As linhas 69 e 70 **contém** uma vulnerabilidade SQL Injection, **identificável**  no SAST do .gitlab-ci;
 
 ## Deploy com docker compose, com MySQL
 ```
