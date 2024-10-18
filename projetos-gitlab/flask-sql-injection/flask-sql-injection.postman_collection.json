@@ -50,8 +50,7 @@
 						{
 							"key": "password",
 							"value": "1234",
-							"type": "text",
-							"disabled": true
+							"type": "text"
 						}
 					]
 				},

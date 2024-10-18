@@ -28,13 +28,13 @@ def login():
         
         conn = db_connect.connect()
 
-        sql_Query_Not_Injection = text("SELECT * FROM users WHERE username=:username AND password=:password")
-        result = conn.execute(sql_Query_Not_Injection, parameters=dict(username = username_from_form
-                                                                       , password = password_from_form))
+        #sql_Query_Not_Injection = text("SELECT * FROM users WHERE username=:username AND password=:password")
+        #result = conn.execute(sql_Query_Not_Injection, parameters=dict(username = username_from_form
+        #                                                               , password = password_from_form))
         
-        #sql_Query_Injection_False_Negative = text("SELECT * FROM users WHERE username = '" + username_from_form + "'"
-         #                                       " AND password = " + password_from_form)                                         
-        #result = conn.execute(sql_Query_Injection_False_Negative)
+        sql_Query_Injection_False_Negative = text("SELECT * FROM users WHERE username = '" + username_from_form + "'"
+                                               " AND password = " + password_from_form)                                         
+        result = conn.execute(sql_Query_Injection_False_Negative)
 
         content = "<table>"
         content = content + str("<tr>")
@@ -63,12 +63,12 @@ def login():
         
         conn = db_connect.connect()
 
-        sql_Query_Not_Injection = text("SELECT * FROM users WHERE id=:user_id")
-        result = conn.execute(sql_Query_Not_Injection, parameters=dict(user_id = id))
+        #sql_Query_Not_Injection = text("SELECT * FROM users WHERE id=:user_id")
+        #result = conn.execute(sql_Query_Not_Injection, parameters=dict(user_id = id))
         
-        #sql_Query_Injection_False_Negative = text("SELECT * FROM users WHERE username = '" + username_from_url + "'"
-        #                                        " AND password = " + password_from_url)                                         
-        #result = conn.execute(sql_Query_Injection_False_Negative)
+        sql_Query_Injection_False_Negative = text("SELECT * FROM users WHERE username = '" + username_from_url + "'"
+                                                " AND password = " + password_from_url)                                         
+        result = conn.execute(sql_Query_Injection_False_Negative)
 
         # deprecated in SQLAlchemy >=2.0
         #sql_Query_Injection = "SELECT * FROM users WHERE id={}".format(id)
